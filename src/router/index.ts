@@ -5,16 +5,22 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('../layouts/MainLayout.vue'),
-      meta: { public: true }
+        path: '/login',
+        name: 'login',
+        component: () => import('../views/LoginView.vue'),
+        meta: { public: true }
     },
     {
       path: '/',
       name: 'dashboard',
       component: () => import('../layouts/MainLayout.vue'),
       meta: { public: false }
+    },
+    {
+        path: '/callback',
+        name: 'callback',
+        component: () => import('../views/CallbackView.vue'),
+        meta: { public: true }
     },
     {
       path: '/clientes/registro',
