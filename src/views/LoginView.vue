@@ -3,11 +3,12 @@
     <div class="w-full max-w-md">
 
       <!-- Logo -->
-      <div class="bg-[#049ADA] rounded-xl p-6 mb-8 flex items-center justify-center">
-        <div class="text-center">
-          <h1 class="text-white font-extrabold text-5xl tracking-tight">VOPU</h1>
-          <p class="text-white/80 text-sm font-medium tracking-widest mt-1">VOLANDO PUES</p>
-        </div>
+      <div class="mb-8">
+        <img
+          src="/BannerVopuManagement.png"
+          alt="Vopu Management"
+          class="w-full h-auto object-contain rounded-xl shadow-sm"
+        />
       </div>
 
       <!-- Título -->
