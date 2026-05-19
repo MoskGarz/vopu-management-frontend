@@ -7,29 +7,57 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../layouts/MainLayout.vue'),
+      component: () => import('../views/LoginView.vue'),
+      meta: { public: true }
+    },
+    {
+      path: '/callback',
+      name: 'callback',
+      component: () => import('../views/CallbackView.vue'),
       meta: { public: true }
     },
     {
       path: '/',
-      name: 'dashboard',
       component: () => import('../layouts/MainLayout.vue'),
-      meta: { public: false }
-    },
-    {
-      path: '/clientes/registro',
-      name: 'registro-cliente',
-      component: () => import('../modules/clientes/views/RegisterClienteView.vue'),
-      meta: { public: false }
+      meta: { public: false },
+      children: [
+        {
+          path: '',
+          name: 'dashboard',
+          component: () => import('../views/DashboardView.vue'),
+        },
+        {
+          path: 'clientes/registro',
+          name: 'registro-cliente',
+          component: () => import('../modules/clientes/views/RegisterClienteView.vue'),
+        }
+      ]
     }
   ]
 })
 
-router.beforeEach((to) => {
+router.beforeEach(async (to) => {
+  if (to.meta.public) return true
+
   const authStore = useAuthStore()
-  if (!to.meta.public && !authStore.isLogged) {
-    return { name: 'login' }
+  if (authStore.isLogged) return true
+
+  // Si no hay sesión en el store, verificar con Auth0
+  const { useAuth0 } = await import('@auth0/auth0-vue')
+  const auth0 = useAuth0()
+
+  await auth0.checkSession()
+
+  if (auth0.isAuthenticated.value) {
+    const token = await auth0.getAccessTokenSilently()
+    authStore.setSession(token, {
+      sub: auth0.user.value?.sub ?? '',
+      email: auth0.user.value?.email ?? ''
+    })
+    return true
   }
+
+  return { name: 'login' }
 })
 
 export default router

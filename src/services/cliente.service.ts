@@ -7,7 +7,11 @@ export interface RegisterClienteDto {
 }
 
 async function registerCliente(dto: RegisterClienteDto): Promise<void> {
-  await api.post('/clientes', dto)
+  await api.post('/api/v1/clientes', {
+    nombre_completo: dto.nombreCompleto,
+    numero_documento: dto.numeroDocumento,
+    telefono: dto.telefono
+  })
 }
 
 export default { registerCliente }
