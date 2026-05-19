@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import clienteService from '../services/cliente.service'
 import type { RegisterClienteDto } from '../services/cliente.service'
+import axios from 'axios'
 
 export function useClientes() {
   const loading = ref(false)
@@ -15,8 +16,15 @@ export function useClientes() {
       await clienteService.registerCliente(dto)
       success.value = true
     } catch (e: unknown) {
-      error.value = e instanceof Error ? e.message : 'error.desconocido'
-    } finally {
+      if (axios.isAxiosError(e) && e.response?.data?.detail?.messages?.[0]) {
+        error.value = e.response.data.detail.messages[0]
+      } else if (e instanceof Error) {
+        error.value = e.message
+      } else {
+        error.value = 'error.desconocido'
+      }
+    }
+     finally {
       loading.value = false
     }
   }
