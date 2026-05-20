@@ -46,20 +46,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useAuth0 } from '@auth0/auth0-vue'
+import { useAuth } from '../composables/useAuth'
 
-const { loginWithRedirect } = useAuth0()
-const isLoading = ref(false)
+const { login, isLoading } = useAuth()
 const error = ref<string | null>(null)
-
-async function login() {
-  isLoading.value = true
-  error.value = null
-  try {
-    await loginWithRedirect()
-  } catch (e: unknown) {
-    error.value = e instanceof Error ? e.message : 'Error al iniciar sesión'
-    isLoading.value = false
-  }
-}
 </script>

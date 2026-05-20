@@ -3,13 +3,13 @@
 
     <!-- Sidebar -->
     <aside class="hidden md:flex flex-col h-screen w-64 bg-primary py-6 shrink-0 fixed left-0 top-0">
-    <div class="mb-16 px-4">
-      <img
-        src="/BannerVopu2.jpg"
-        alt="Vopu Management"
-        class="w-full h-auto object-contain rounded-lg"
-      />
-    </div>
+      <div class="mb-16 px-4">
+        <img
+          src="/BannerVopu2.jpg"
+          alt="Vopu Management"
+          class="w-full h-auto object-contain rounded-lg"
+        />
+      </div>
 
       <nav class="flex-1 space-y-1 px-3">
         <RouterLink
@@ -20,6 +20,16 @@
           <span class="text-sm">Clientes</span>
         </RouterLink>
       </nav>
+
+      <!-- Botón volver al dashboard -->
+      <div class="px-3 mb-4">
+        <RouterLink
+          to="/"
+          class="flex items-center gap-3 text-white/70 rounded-lg px-4 py-3 transition-all hover:bg-white/20 hover:text-white text-sm"
+        >
+          ← Dashboard
+        </RouterLink>
+      </div>
     </aside>
 
     <!-- Contenido principal -->
@@ -29,6 +39,12 @@
       <header class="flex justify-between items-center w-full px-8 h-16 bg-[#f6fafe] border-b border-[#bec8d1] fixed top-0 md:left-64 md:w-[calc(100%-16rem)] z-10">
         <h2 class="text-xl font-bold text-primary">{{ pageTitle }}</h2>
         <div class="flex items-center gap-4">
+          <button
+            @click="handleLogout"
+            class="text-sm text-[#3e4850] hover:text-primary transition-colors font-medium"
+          >
+            Cerrar sesión
+          </button>
           <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold">
             {{ userInitial }}
           </div>
@@ -48,9 +64,11 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth.store'
+import { useAuth } from '../composables/useAuth'
 
 const route = useRoute()
 const authStore = useAuthStore()
+const { logout } = useAuth()
 
 const pageTitle = computed(() => {
   const titles: Record<string, string> = {
@@ -62,4 +80,9 @@ const pageTitle = computed(() => {
 const userInitial = computed(() => {
   return authStore.user?.email?.charAt(0).toUpperCase() ?? 'U'
 })
+
+async function handleLogout() {
+  authStore.clearSession()
+  await logout()
+}
 </script>

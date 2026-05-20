@@ -8,4 +8,5 @@ export const tolgee = Tolgee()
     language: 'es',
     apiUrl: import.meta.env.VITE_TOLGEE_API_URL,
     apiKey: import.meta.env.VITE_TOLGEE_API_KEY,
+    staticData: undefined
   })

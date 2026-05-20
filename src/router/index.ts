@@ -42,11 +42,21 @@ router.beforeEach(async (to) => {
   const authStore = useAuthStore()
   if (authStore.isLogged) return true
 
-  // Si no hay sesión en el store, verificar con Auth0
   const { useAuth0 } = await import('@auth0/auth0-vue')
   const auth0 = useAuth0()
 
-  await auth0.checkSession()
+  // Esperar a que Auth0 termine de cargar
+  if (auth0.isLoading.value) {
+    await new Promise<void>((resolve) => {
+      const unwatch = auth0.isLoading
+      const interval = setInterval(() => {
+        if (!unwatch.value) {
+          clearInterval(interval)
+          resolve()
+        }
+      }, 50)
+    })
+  }
 
   if (auth0.isAuthenticated.value) {
     const token = await auth0.getAccessTokenSilently()

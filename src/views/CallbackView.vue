@@ -6,22 +6,28 @@
 
 <script setup lang="ts">
 import { watchEffect } from 'vue'
-import { useAuth0 } from '@auth0/auth0-vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth.store'
+import { useAuth } from '../composables/useAuth'
 
-const { isAuthenticated, isLoading, getAccessTokenSilently, user } = useAuth0()
+const { isAuthenticated, isLoading, getSession } = useAuth()
 const authStore = useAuthStore()
 const router = useRouter()
 
 watchEffect(async () => {
-  if (!isLoading.value && isAuthenticated.value) {
-    const token = await getAccessTokenSilently()
-    authStore.setSession(token, {
-      sub: user.value?.sub ?? '',
-      email: user.value?.email ?? ''
-    })
-    router.push('/')
+  if (!isLoading.value) {
+    if (isAuthenticated.value) {
+      const session = await getSession()
+      if (session) {
+        authStore.setSession(session.token, {
+          sub: session.sub,
+          email: session.email
+        })
+      }
+      router.push('/')
+    } else {
+      router.push('/login')
+    }
   }
 })
 </script>
