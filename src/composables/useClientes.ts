@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import clienteService from '../services/cliente.service'
 import type { RegisterClienteDto } from '../services/cliente.service'
 import { useMessages } from './useMessages'
+import { useReCaptcha } from 'vue-recaptcha-v3'
 import axios from 'axios'
 
 export function useClientes() {
@@ -9,13 +10,16 @@ export function useClientes() {
   const error = ref<string | null>(null)
   const success = ref(false)
   const { getMessage } = useMessages()
+  const recaptcha = useReCaptcha()
 
   async function registerCliente(dto: RegisterClienteDto) {
     loading.value = true
     error.value = null
     success.value = false
     try {
-      await clienteService.registerCliente(dto)
+      await recaptcha?.recaptchaLoaded()
+      const token = await recaptcha?.executeRecaptcha('register_cliente')
+      await clienteService.registerCliente(dto, token ?? '')
       success.value = true
     } catch (e: unknown) {
       if (axios.isAxiosError(e)) {

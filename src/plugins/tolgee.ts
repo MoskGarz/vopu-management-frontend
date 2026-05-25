@@ -6,6 +6,7 @@ export const tolgee = Tolgee()
   .use(FormatSimple())
   .init({
     language: 'es',
+    availableLanguages: ['es', 'en'],
     apiUrl: import.meta.env.VITE_TOLGEE_API_URL,
     apiKey: import.meta.env.VITE_TOLGEE_API_KEY,
     staticData: undefined
