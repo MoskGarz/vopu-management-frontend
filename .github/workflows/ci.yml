@@ -58,7 +58,7 @@ jobs:
 
     steps:
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@f077f8f7197e7e084c2c7a8e77916de1f0a78ef5 # v1.2.2
+        uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
