@@ -16,7 +16,7 @@ app.use(VueTolgee, { tolgee })
 app.use(VueReCaptcha, {
   siteKey: import.meta.env.VITE_RECAPTCHA_SITE_KEY,
   loaderOptions: {
-    autoHideBadge: true
+    autoHideBadge: false
   }
 })
 

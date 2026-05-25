@@ -3,9 +3,11 @@
     <div class="w-full max-w-2xl bg-white border border-[#bec8d1] rounded-lg p-10 shadow-sm">
 
       <div class="mb-10">
-        <h3 class="text-2xl font-bold text-[#171c20]">Crear un nuevo cliente</h3>
+        <h3 class="text-2xl font-bold text-[#171c20]">
+          <T keyName="cliente.registro.titulo" />
+        </h3>
         <p class="text-[#3e4850] mt-1 text-sm">
-          Complete la información básica y de contacto para el registro del nuevo cliente.
+          <T keyName="cliente.registro.subtitulo" />
         </p>
       </div>
 
@@ -14,7 +16,7 @@
       </p>
 
       <p v-if="success" class="mb-6 text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-3">
-        Cliente registrado exitosamente.
+        <T keyName="cliente.registro.exito" />
       </p>
 
       <RegisterClienteForm
@@ -32,6 +34,7 @@ import { useRouter } from 'vue-router'
 import RegisterClienteForm from '../components/RegisterClienteForm.vue'
 import { useClientes } from '../../../composables/useClientes'
 import type { RegisterClienteDto } from '../../../services/cliente.service'
+import { T } from '@tolgee/vue'
 
 const router = useRouter()
 const { loading, error, success, registerCliente } = useClientes()
