@@ -6,11 +6,12 @@ export interface RegisterClienteDto {
   telefono: string
 }
 
-async function registerCliente(dto: RegisterClienteDto): Promise<void> {
+async function registerCliente(dto: RegisterClienteDto, recaptchaToken: string): Promise<void> {
   await api.post('/api/v1/clientes', {
     nombre_completo: dto.nombreCompleto,
     numero_documento: dto.numeroDocumento,
-    telefono: dto.telefono
+    telefono: dto.telefono,
+    recaptcha_token: recaptchaToken
   })
 }
 

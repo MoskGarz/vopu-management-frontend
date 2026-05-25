@@ -39,6 +39,12 @@
       <header class="flex justify-between items-center w-full px-8 h-16 bg-[#f6fafe] border-b border-[#bec8d1] fixed top-0 md:left-64 md:w-[calc(100%-16rem)] z-10">
         <h2 class="text-xl font-bold text-primary">{{ pageTitle }}</h2>
         <div class="flex items-center gap-4">
+           <button
+            @click="toggleLanguage"
+            class="text-sm text-[#3e4850] hover:text-primary transition-colors font-medium border border-[#bec8d1] rounded px-2 py-1"
+          >
+            {{ currentLanguage === 'es' ? 'EN' : 'ES' }}
+          </button>
           <button
             @click="handleLogout"
             class="text-sm text-[#3e4850] hover:text-primary transition-colors font-medium"
@@ -61,14 +67,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth.store'
 import { useAuth } from '../composables/useAuth'
+import { tolgee } from '../plugins/tolgee'
 
 const route = useRoute()
 const authStore = useAuthStore()
 const { logout } = useAuth()
+
+const currentLanguage = ref(tolgee.getLanguage() ?? 'es')
+
+async function toggleLanguage() {
+  const newLang = currentLanguage.value === 'es' ? 'en' : 'es'
+  await tolgee.changeLanguage(newLang)
+  currentLanguage.value = newLang
+}
 
 const pageTitle = computed(() => {
   const titles: Record<string, string> = {
