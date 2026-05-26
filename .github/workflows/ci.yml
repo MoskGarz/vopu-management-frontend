@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
-    branches: [main]
+    branches: [main, develop]
 
 jobs:
   build:
@@ -54,8 +54,7 @@ jobs:
     name: Deploy to VPS
     runs-on: ubuntu-latest
     needs: sonar
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && github.event_name == 'push'
     steps:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
@@ -65,7 +64,9 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
             cd /opt/vopu-management-frontend
-            git pull origin main
+            git fetch origin
+            git checkout develop || git checkout -b develop origin/develop
+            git pull origin develop
             cd /opt/vopu-management-backend
             infisical run --env=prod --path=/backend --path=/frontend -- docker compose build --no-cache frontend
             infisical run --env=prod --path=/backend --path=/frontend -- docker compose up -d --force-recreate frontend
