@@ -1,8 +1,7 @@
-import { tolgee } from '../plugins/tolgee'
+import { i18n } from '../i18n'
 
 async function getMessage(key: string): Promise<string> {
-  await tolgee.run()
-  return tolgee.t(key) ?? key
+  return i18n.global.t(key)
 }
 
 export function useMessages() {
