@@ -11,12 +11,8 @@
       </div>
 
       <div class="text-center mb-8">
-        <h2 class="text-2xl font-bold text-[#0b1c30]">
-          <T keyName="login.titulo" />
-        </h2>
-        <p class="text-[#3e4850] mt-2 text-sm">
-          <T keyName="login.subtitulo" />
-        </p>
+        <h2 class="text-2xl font-bold text-[#0b1c30]">{{ t('login.titulo') }}</h2>
+        <p class="text-[#3e4850] mt-2 text-sm">{{ t('login.subtitulo') }}</p>
       </div>
 
       <div class="bg-white rounded-xl border border-[#bec8d1] p-8 shadow-sm">
@@ -25,12 +21,12 @@
           :disabled="isLoading"
           class="w-full bg-[#00628d] hover:bg-[#004c6e] text-white font-bold py-4 px-6 rounded-lg transition-colors flex items-center justify-center gap-3 disabled:opacity-60"
         >
-          <span v-if="isLoading"><T keyName="login.redirigiendo" /></span>
-          <span v-else><T keyName="login.boton" /></span>
+          <span v-if="isLoading">{{ t('login.redirigiendo') }}</span>
+          <span v-else>{{ t('login.boton') }}</span>
         </button>
 
         <p v-if="error" class="mt-4 text-sm text-red-600 text-center">
-          <T keyName="login.error" />
+          {{ t('login.error') }}
         </p>
       </div>
 
@@ -47,8 +43,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAuth } from '../composables/useAuth'
-import { T } from '@tolgee/vue'
+import { useI18n } from 'vue-i18n'
 
 const { login, isLoading } = useAuth()
+const { t } = useI18n()
 const error = ref<string | null>(null)
 </script>

@@ -19,4 +19,8 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return { token, isLogged, user, setSession, clearSession }
-})
+},
+  {
+    persist: true
+  }
+)

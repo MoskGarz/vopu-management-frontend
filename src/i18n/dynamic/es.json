@@ -1,0 +1,65 @@
+{
+  "cliente": {
+    "documento": {
+      "duplicado": "El número de documento ya está registrado",
+      "formato": {
+        "invalido": "El número de documento solo debe contener números"
+      },
+      "invalido": "El número de documento es inválido",
+      "longitud": {
+        "invalida": "El número de documento debe tener entre 7 y 10 dígitos"
+      }
+    },
+    "nombre_completo": {
+      "formato": {
+        "invalido": "El nombre completo contiene caracteres no permitidos"
+      },
+      "invalido": "El nombre completo es inválido",
+      "longitud": {
+        "invalida": "El nombre completo debe tener entre 2 y 50 caracteres"
+      }
+    },
+    "registro": {
+      "exito": "Cliente registrado exitosamente"
+    },
+    "telefono": {
+      "duplicado": "El número de teléfono ya está registrado",
+      "formato": {
+        "invalido": "El formato del teléfono no es válido"
+      },
+      "invalido": "El número de teléfono es inválido",
+      "longitud": {
+        "invalida": "El número de teléfono debe tener entre 7 y 15 caracteres"
+      }
+    }
+  },
+  "error": {
+    "inesperado": "Ocurrió un error inesperado. Por favor intenta de nuevo.",
+    "servicio": {
+      "no_disponible": "El servicio no está disponible en este momento. Intenta más tarde."
+    }
+  },
+  "infraestructura": {
+    "error_inesperado": "Ocurrió un error inesperado. Por favor intenta de nuevo."
+  },
+  "validacion": {
+    "documento": {
+      "formato": "Solo números",
+      "maximo": "Máximo 10 dígitos",
+      "minimo": "Mínimo 7 dígitos",
+      "requerido": "El número de documento es requerido"
+    },
+    "nombre": {
+      "formato": "Solo letras, espacios y caracteres como . , - #",
+      "maximo": "Máximo 50 caracteres",
+      "minimo": "Mínimo 2 caracteres",
+      "requerido": "El nombre es requerido"
+    },
+    "telefono": {
+      "formato": "Formato válido: +57 300 000 0000",
+      "maximo": "Máximo 15 caracteres",
+      "minimo": "Mínimo 7 caracteres",
+      "requerido": "El teléfono es requerido"
+    }
+  }
+}

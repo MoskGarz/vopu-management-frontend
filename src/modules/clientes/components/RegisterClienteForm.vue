@@ -3,7 +3,7 @@
 
     <div class="space-y-1">
       <label for="nombreCompleto" class="text-xs font-semibold text-[#3e4850] tracking-wider uppercase">
-        <T keyName="cliente.registro.campo.nombre" />
+        {{ t('registro.campo_nombre') }}
       </label>
       <input
         id="nombreCompleto"
@@ -22,7 +22,7 @@
 
       <div class="space-y-1">
         <label for="numeroDocumento" class="text-xs font-semibold text-[#3e4850] tracking-wider uppercase">
-          <T keyName="cliente.registro.campo.documento" />
+          {{ t('registro.campo_documento') }}
         </label>
         <input
           id="numeroDocumento"
@@ -39,7 +39,7 @@
 
       <div class="space-y-1">
         <label for="telefono" class="text-xs font-semibold text-[#3e4850] tracking-wider uppercase">
-          <T keyName="cliente.registro.campo.telefono" />
+          {{ t('registro.campo_telefono') }}
         </label>
         <input
           id="telefono"
@@ -62,14 +62,14 @@
         @click="emit('cancel')"
         class="px-8 py-3 border border-primary text-primary text-sm font-semibold rounded-lg hover:bg-[#eaeef3] transition-colors"
       >
-        <T keyName="cliente.registro.boton.cancelar" />
+        {{ t('registro.boton_cancelar') }}
       </button>
       <button
         type="submit"
         :disabled="isLoading"
         class="px-8 py-3 bg-primary text-white text-sm font-semibold rounded-lg hover:opacity-90 transition-all shadow-sm disabled:opacity-60"
       >
-        {{ isLoading ? $t('login.redirigiendo') : $t('cliente.registro.boton.guardar') }}
+        {{ isLoading ? t('registro.guardando') : t('registro.boton_guardar') }}
       </button>
     </div>
 
@@ -80,8 +80,9 @@
 import { reactive } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, maxLength, helpers } from '@vuelidate/validators'
-import { T, useTranslate } from '@tolgee/vue'
+import { useI18n } from 'vue-i18n'
 import type { RegisterClienteDto } from '../../../services/cliente.service'
+
 
 const props = defineProps<{ isLoading: boolean }>()
 const emit = defineEmits<{
@@ -89,7 +90,7 @@ const emit = defineEmits<{
   cancel: []
 }>()
 
-const { t } = useTranslate()
+const { t } = useI18n()
 
 const form = reactive<RegisterClienteDto>({
   nombreCompleto: '',
@@ -99,29 +100,29 @@ const form = reactive<RegisterClienteDto>({
 
 const rules = {
   nombreCompleto: {
-    required: helpers.withMessage(() => t.value('validacion.nombre.requerido'), required),
-    minLength: helpers.withMessage(() => t.value('validacion.nombre.minimo'), minLength(2)),
-    maxLength: helpers.withMessage(() => t.value('validacion.nombre.maximo'), maxLength(50)),
+    required: helpers.withMessage(() => t('validacion.nombre.requerido'), required),
+    minLength: helpers.withMessage(() => t('validacion.nombre.minimo'), minLength(2)),
+    maxLength: helpers.withMessage(() => t('validacion.nombre.maximo'), maxLength(50)),
     formato: helpers.withMessage(
-      () => t.value('validacion.nombre.formato'),
+      () => t('validacion.nombre.formato'),
       helpers.regex(/^[A-Za-záéíóúÁÉÍÓÚñÑüÜ0-9'\-.,"#&\s]+$/)
     )
   },
   numeroDocumento: {
-    required: helpers.withMessage(() => t.value('validacion.documento.requerido'), required),
-    minLength: helpers.withMessage(() => t.value('validacion.documento.minimo'), minLength(7)),
-    maxLength: helpers.withMessage(() => t.value('validacion.documento.maximo'), maxLength(10)),
+    required: helpers.withMessage(() => t('validacion.documento.requerido'), required),
+    minLength: helpers.withMessage(() => t('validacion.documento.minimo'), minLength(7)),
+    maxLength: helpers.withMessage(() => t('validacion.documento.maximo'), maxLength(10)),
     formato: helpers.withMessage(
-      () => t.value('validacion.documento.formato'),
+      () => t('validacion.documento.formato'),
       helpers.regex(/^\d{7,10}$/)
     )
   },
   telefono: {
-    required: helpers.withMessage(() => t.value('validacion.telefono.requerido'), required),
-    minLength: helpers.withMessage(() => t.value('validacion.telefono.minimo'), minLength(7)),
-    maxLength: helpers.withMessage(() => t.value('validacion.telefono.maximo'), maxLength(15)),
+    required: helpers.withMessage(() => t('validacion.telefono.requerido'), required),
+    minLength: helpers.withMessage(() => t('validacion.telefono.minimo'), minLength(7)),
+    maxLength: helpers.withMessage(() => t('validacion.telefono.maximo'), maxLength(15)),
     formato: helpers.withMessage(
-      () => t.value('validacion.telefono.formato'),
+      () => t('validacion.telefono.formato'),
       helpers.regex(/^\+?\d{7,15}$/)
     )
   }

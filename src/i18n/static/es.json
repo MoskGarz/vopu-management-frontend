@@ -1,0 +1,31 @@
+{
+  "login": {
+    "titulo": "Inicia sesión en tu cuenta",
+    "subtitulo": "Gestión de arquitectura empresarial de alta velocidad",
+    "boton": "Iniciar Sesión →",
+    "redirigiendo": "Redirigiendo...",
+    "error": "Error al iniciar sesión"
+  },
+  "navegacion": {
+    "clientes": "Clientes",
+    "dashboard": "← Panel de Control",
+    "cerrar_sesion": "Cerrar sesión"
+  },
+  "pagina": {
+    "crear_cliente": "Crear Cliente",
+    "vopu_management": "Vopu Management"
+  },
+  "registro": {
+    "titulo": "Crear un nuevo cliente",
+    "subtitulo": "Complete la información básica y de contacto para el registro del nuevo cliente",
+    "campo_nombre": "Nombre completo",
+    "campo_documento": "Número de documento",
+    "campo_telefono": "Número de teléfono",
+    "boton_guardar": "Guardar",
+    "boton_cancelar": "Cancelar",
+    "guardando": "Guardando..."
+  },
+  "dashboard": {
+  "bienvenida": "Bienvenido a Vopu Management"
+  }
+}

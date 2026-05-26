@@ -16,7 +16,7 @@
           class="flex items-center gap-3 text-white rounded-lg font-bold px-4 py-3 transition-all hover:bg-white/20"
           active-class="bg-white/20"
         >
-          <span class="text-sm"><T keyName="navegacion.clientes" /></span>
+          <span class="text-sm">{{ t('navegacion.clientes') }}</span>
         </RouterLink>
       </nav>
 
@@ -25,7 +25,7 @@
           to="/"
           class="flex items-center gap-3 text-white/70 rounded-lg px-4 py-3 transition-all hover:bg-white/20 hover:text-white text-sm"
         >
-          <T keyName="navegacion.dashboard" />
+          {{ t('navegacion.dashboard') }}
         </RouterLink>
       </div>
     </aside>
@@ -45,7 +45,7 @@
             @click="handleLogout"
             class="text-sm text-[#3e4850] hover:text-primary transition-colors font-medium"
           >
-            <T keyName="navegacion.cerrar_sesion" />
+            {{ t('navegacion.cerrar_sesion') }}
           </button>
           <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold">
             {{ userInitial }}
@@ -66,27 +66,26 @@ import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth.store'
 import { useAuth } from '../composables/useAuth'
-import { tolgee } from '../plugins/tolgee'
-import { T, useTranslate } from '@tolgee/vue'
+import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const authStore = useAuthStore()
 const { logout } = useAuth()
-const { t } = useTranslate()
+const { t, locale } = useI18n()
 
-const currentLanguage = ref(tolgee.getLanguage() ?? 'es')
+const currentLanguage = ref(locale.value)
 
 async function toggleLanguage() {
   const newLang = currentLanguage.value === 'es' ? 'en' : 'es'
-  await tolgee.changeLanguage(newLang)
+  locale.value = newLang
   currentLanguage.value = newLang
 }
 
 const pageTitle = computed(() => {
   const titles: Record<string, string> = {
-    'registro-cliente': t.value('pagina.crear_cliente'),
+    'registro-cliente': t('pagina.crear_cliente'),
   }
-  return titles[route.name as string] ?? t.value('pagina.vopu_management')
+  return titles[route.name as string] ?? t('pagina.vopu_management')
 })
 
 const userInitial = computed(() => {
