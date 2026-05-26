@@ -24,6 +24,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Pull translations from Tolgee
+        env:
+          VITE_TOLGEE_API_URL: ${{ secrets.VITE_TOLGEE_API_URL }}
+          VITE_TOLGEE_API_KEY: ${{ secrets.VITE_TOLGEE_API_KEY }}
+        run: npm run tolgee:pull
+
       - name: Type check
         run: npm run build
 

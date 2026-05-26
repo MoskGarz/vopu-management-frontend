@@ -1,13 +1,27 @@
 import { createI18n } from 'vue-i18n'
-import es from './es.json'
-import en from './en.json'
+
+import esStatic from './static/es.json'
+import enStatic from './static/en.json'
+
+import esDynamic from './dynamic/es.json'
+import enDynamic from './dynamic/en.json'
 
 export const i18n = createI18n({
   legacy: false,
+
   locale: 'es',
+
   fallbackLocale: 'es',
+
   messages: {
-    es,
-    en
+    es: {
+      ...esStatic,
+      ...esDynamic
+    },
+
+    en: {
+      ...enStatic,
+      ...enDynamic
+    }
   }
 })

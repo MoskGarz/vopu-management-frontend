@@ -1,0 +1,65 @@
+{
+  "cliente": {
+    "documento": {
+      "duplicado": "The document number is already registered",
+      "formato": {
+        "invalido": "The document number must contain numbers only"
+      },
+      "invalido": "The document number is invalid",
+      "longitud": {
+        "invalida": "The document number must be between 7 and 10 digits"
+      }
+    },
+    "nombre_completo": {
+      "formato": {
+        "invalido": "The full name contains invalid characters"
+      },
+      "invalido": "The full name is invalid",
+      "longitud": {
+        "invalida": "The full name must be between 2 and 50 characters"
+      }
+    },
+    "registro": {
+      "exito": "Client successfully registered"
+    },
+    "telefono": {
+      "duplicado": "The phone number is already registered",
+      "formato": {
+        "invalido": "The phone number format is not valid"
+      },
+      "invalido": "The phone number is invalid",
+      "longitud": {
+        "invalida": "The phone number must be between 7 and 15 characters"
+      }
+    }
+  },
+  "error": {
+    "inesperado": "An unexpected error occurred. Please try again.",
+    "servicio": {
+      "no_disponible": "The service is currently unavailable. Please try again later."
+    }
+  },
+  "infraestructura": {
+    "error_inesperado": "An unexpected error occurred. Please try again."
+  },
+  "validacion": {
+    "documento": {
+      "formato": "Numbers only",
+      "maximo": "Maximum 10 digits",
+      "minimo": "Minimum 7 digits",
+      "requerido": "Document number is required"
+    },
+    "nombre": {
+      "formato": "Letters, spaces and characters like . , - # only",
+      "maximo": "Maximum 50 characters",
+      "minimo": "Minimum 2 characters",
+      "requerido": "Full name is required"
+    },
+    "telefono": {
+      "formato": "Valid format: +57 300 000 0000",
+      "maximo": "Maximum 15 characters",
+      "minimo": "Minimum 7 characters",
+      "requerido": "Phone number is required"
+    }
+  }
+}

@@ -66,7 +66,6 @@ import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth.store'
 import { useAuth } from '../composables/useAuth'
-import { tolgee } from '../plugins/tolgee'
 import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
@@ -79,7 +78,6 @@ const currentLanguage = ref(locale.value)
 async function toggleLanguage() {
   const newLang = currentLanguage.value === 'es' ? 'en' : 'es'
   locale.value = newLang
-  await tolgee.changeLanguage(newLang)
   currentLanguage.value = newLang
 }
 
