@@ -24,7 +24,9 @@ export function useAuth() {
 
   async function getSession() {
     if (!isAuthenticated.value) return null
+
     const token = await getAccessTokenSilently()
+
     return {
       token,
       sub: user.value?.sub ?? '',
@@ -32,5 +34,11 @@ export function useAuth() {
     }
   }
 
-  return { isAuthenticated, isLoading, login, logout, getSession }
+  return {
+    isAuthenticated,
+    isLoading,
+    login,
+    logout,
+    getSession
+  }
 }
