@@ -1,0 +1,28 @@
+{
+  "login": {
+    "titulo": "Sign in to your account",
+    "subtitulo": "High-velocity enterprise architecture management",
+    "boton": "Sign In →",
+    "redirigiendo": "Redirecting...",
+    "error": "Error signing in"
+  },
+  "navegacion": {
+    "clientes": "Clients",
+    "dashboard": "← Dashboard",
+    "cerrar_sesion": "Sign out"
+  },
+  "pagina": {
+    "crear_cliente": "Create Client",
+    "vopu_management": "Vopu Management"
+  },
+  "registro": {
+    "titulo": "Create a new client",
+    "subtitulo": "Complete the basic and contact information to register the new client",
+    "campo_nombre": "Full name",
+    "campo_documento": "Document number",
+    "campo_telefono": "Phone number",
+    "boton_guardar": "Save",
+    "boton_cancelar": "Cancel",
+    "guardando": "Saving..."
+  }
+}

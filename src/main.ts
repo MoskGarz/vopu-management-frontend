@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import { auth0 } from './plugins/auth0'
 import { tolgee, VueTolgee } from './plugins/tolgee'
 import { VueReCaptcha } from 'vue-recaptcha-v3'
+import { i18n } from './i18n'
 import router from './router'
 import App from './App.vue'
 import './style.css'
@@ -19,5 +20,6 @@ app.use(VueReCaptcha, {
     autoHideBadge: true
   }
 })
+app.use(i18n)
 
 app.mount('#app')

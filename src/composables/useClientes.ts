@@ -1,20 +1,20 @@
 import { ref } from 'vue'
 import clienteService from '../services/cliente.service'
 import type { RegisterClienteDto } from '../services/cliente.service'
-import { useMessages } from './useMessages'
 import { useReCaptcha } from 'vue-recaptcha-v3'
 import axios from 'axios'
 
 export function useClientes() {
   const loading = ref(false)
-  const error = ref<string | null>(null)
+  const errorKey = ref<string | null>(null)
+  const errorMessage = ref<string | null>(null)
   const success = ref(false)
-  const { getMessage } = useMessages()
   const recaptcha = useReCaptcha()
 
   async function registerCliente(dto: RegisterClienteDto) {
     loading.value = true
-    error.value = null
+    errorKey.value = null
+    errorMessage.value = null
     success.value = false
     try {
       await recaptcha?.recaptchaLoaded()
@@ -25,21 +25,21 @@ export function useClientes() {
       if (axios.isAxiosError(e)) {
         const messages = e.response?.data?.detail?.messages
         if (messages?.[0]) {
-          error.value = messages[0]
+          errorKey.value = messages[0]
         } else if (e.response?.status === 502 || e.response?.status === 503 || !e.response) {
-          error.value = await getMessage('error.servicio.no_disponible')
+          errorKey.value = 'error.servicio.no_disponible'
         } else {
-          error.value = await getMessage('error.inesperado')
+          errorKey.value = 'error.inesperado'
         }
       } else if (e instanceof Error) {
-        error.value = e.message
+        errorMessage.value = e.message
       } else {
-        error.value = await getMessage('error.inesperado')
+        errorKey.value = 'error.inesperado'
       }
     } finally {
       loading.value = false
     }
   }
 
-  return { loading, error, success, registerCliente }
+  return { loading, errorKey, errorMessage, success, registerCliente }
 }
