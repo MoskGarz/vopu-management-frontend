@@ -24,5 +24,8 @@
     "boton_guardar": "Save",
     "boton_cancelar": "Cancel",
     "guardando": "Saving..."
+  },
+  "dashboard": {
+  "bienvenida": "Welcome to Vopu Management"
   }
 }
